@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Final Project</title>
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
+    <script src="scripts/popups.js" defer="defer"></script>
+    <script src="scripts/word.js" defer="defer"></script>
+    <script src="scripts/main.js" defer="defer"></script>
+</head>
+<body>
+    <header>
+    </header>
+    <div class="wrapper">
+        <main>
+            <div id="instructions" class="popup">
+                <div class="popup-content">
+                        <h3>Welcome.</h3>
+                        <p>Instructions:</p>
+                        <p>Insert instructions here</p>
+                        <button class="close" id="closeInstructions">I understand.</button>
+                </div>
+            </div>
+
+            <div id="gameOver" class="popup" style="display: none;">
+                <div class="popup-content">
+                    <div id="gameOverMsg">
+                        <h3>Game Over.</h3>
+                        <p></p>
+                        <p>You have lost/won</p>
+                    </div>
+                    <button class="close" id="closeGameOver">Start New Game.</button>
+                </div>
+            </div>
+
+                <button id="showInstructions" class="popup-buttons">How to Play</button>
+                <button id="reset" class="popup-buttons">Restart</button>
+                <h1>Hangman Game: FFXIV Minions</h1>
+            <div id="main-content" class="main-content">
+                <div class="board">
+                    <img src="images/image0.png" alt="null" id="hangmanImg">
+                </div>
+                <div class="board">
+                    <h1 id="phrase"></h1>                
+                    <h3 id="hint">Hint goes here</h3>
+                    <div id="keyboard"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div id="test-area" >
+        this is test area
+        <button id="myButton">It is a button</button>
+        <div id="myTest" style="display: flex;"> </div>
+    </div>
+    <footer>
+        <small>A00793736</small>
+        <div>ALL FINAL FANTASY XIV CONTENT IS PROPERTY OF SQUARE ENIX CO., LTD </div>
+    </footer>
+    <script src="scripts/jquery-3.4.1.min.js"></script>
+</body>
+</html>

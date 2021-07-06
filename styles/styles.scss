@@ -1,0 +1,117 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@500&display=swap');
+$primary_color: rgb(182, 220, 250);
+$secondary_color: rgb(33, 107, 154 );
+$popup_color: rgba(5, 12, 49, 0.9);
+$underscore_img: url("../images/blank.png");
+$background_img: url("../images/background.jpg");
+
+@mixin letter-box($bg-img) {
+    min-width: 60px;
+    min-height: 50px;
+    padding-top: 10px;
+    font-size: 32px;
+    display: inline-block;
+    background-image: $bg-img;
+    background-size: contain;
+    color:  $primary_color;
+}
+
+@mixin button-style($font-size, $border-radius){
+    font-family: 'Jura', sans-serif;
+    color: white;
+    background-color: $secondary_color;
+   // margin: 2px;
+    font-size: $font-size;//26px;
+    border-radius: $border-radius;
+}
+
+body{ 
+    background: $background_img no-repeat center top #000;
+    position: static;
+    color: white;
+    font-family: 'Jura', sans-serif;
+    text-align: center;
+}
+button{
+    @include button-style(14px, 2px);
+    margin: 0 5px 0 5px;
+}
+
+button:hover{
+    background-color: black;
+    color: $primary_color;
+    border: solid 2px;
+    cursor: pointer;
+  }
+
+.main-content{
+    margin: 0 -8px 0 -8px;
+    display: flex;
+    text-align: center;
+    min-width: 1200px;
+    min-height: 550px;
+    border-style: ridge none ridge none;
+    background-color: rgba(0, 0, 0, .5)
+}
+.board{
+    width: 50%;
+}
+img{
+    max-height: 475px;
+}
+
+.popup-buttons{
+    float: right;
+}
+
+.keyboard{
+    min-width: 40px;
+    min-height: 40px;
+    margin: 10px;
+    border: dotted 2px;
+    @include button-style(28px, 15px);
+}
+.keyboard:disabled {
+    border: solid 2px;
+    background-color: gray;
+  }
+
+  
+
+.alpha{
+    @include letter-box($underscore_img);
+}
+.non-alpha{   
+    @include letter-box(none); 
+}
+
+#hint img{
+    border: dashed 2px;
+    border-radius: 75px;
+    opacity: 0.00;
+}
+
+.popup {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    
+    background-color: rgb(255, 255, 255); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  .popup-content {
+    background: $popup_color;
+    opacity: 0.9;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 2px solid $primary_color;
+    max-width: 400px;
+    border-radius: 25px 0 25px 0;
+  }
+  
