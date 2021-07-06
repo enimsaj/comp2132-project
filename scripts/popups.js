@@ -12,8 +12,8 @@ $('#showInstructions').click ( function() {
 });
 
 $('#closeInstructions').click ( function() {
-    $('#instructions').fadeOut(100);
     $("#audioClose").get(0).play();
+    $('#instructions').fadeOut(100);
 });
 $('#closeGameOver').click ( function() {
     $('#gameOver').fadeOut(100);
