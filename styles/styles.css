@@ -16,7 +16,30 @@ button {
   margin: 0 5px 0 5px;
 }
 
-button:hover {
+button:disabled {
+  border: solid 2px;
+  background-color: gray;
+  opacity: 0.5;
+}
+
+header {
+  min-width: 1200px;
+  display: inline-block;
+}
+
+header h1 {
+  margin: 10px 0 10px 0;
+}
+
+header button {
+  text-align: left;
+}
+
+footer {
+  margin-top: 10px;
+}
+
+button:hover:enabled {
   background-color: black;
   color: #b6dcfa;
   border: solid 2px;
@@ -24,8 +47,7 @@ button:hover {
 }
 
 .main-content {
-  margin: 0 -8px 0 -8px;
-  display: flex;
+  display: inline-block;
   text-align: center;
   min-width: 1200px;
   min-height: 550px;
@@ -33,23 +55,30 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.board {
-  width: 50%;
-}
-
-img {
+.main-content img {
   max-height: 475px;
+  max-width: 50%;
 }
 
-.popup-buttons {
-  float: right;
+.board {
+  display: flex;
+  padding-bottom: 5px;
+}
+
+.board h3 img {
+  border: dashed 2px;
+  border-radius: 75px;
+  opacity: 0.00;
+}
+
+.board div {
+  display: block;
 }
 
 .keyboard {
-  min-width: 40px;
-  min-height: 40px;
+  min-width: 50px;
+  min-height: 50px;
   margin: 10px;
-  border: dotted 2px;
   font-family: 'Jura', sans-serif;
   color: white;
   background-color: #216b9a;
@@ -57,9 +86,8 @@ img {
   border-radius: 15px;
 }
 
-.keyboard:disabled {
-  border: solid 2px;
-  background-color: gray;
+.strikethrough {
+  text-decoration: line-through;
 }
 
 .alpha {
@@ -82,12 +110,6 @@ img {
   background-image: none;
   background-size: contain;
   color: #b6dcfa;
-}
-
-#hint img {
-  border: dashed 2px;
-  border-radius: 75px;
-  opacity: 0.00;
 }
 
 .popup {
@@ -115,6 +137,23 @@ img {
   margin: 15% auto;
   padding: 20px;
   border: 2px solid #b6dcfa;
-  max-width: 400px;
+  max-width: 500px;
   border-radius: 25px 0 25px 0;
+}
+
+.popup-content h3 {
+  margin-top: 0;
+  text-decoration: underline;
+}
+
+.popup-content .quote {
+  font-size: 14px;
+}
+
+.popup-content ul {
+  text-align: left;
+}
+
+.popup-content ul li {
+  list-style-type: circle;
 }

@@ -1,12 +1,9 @@
-const $testArea	   = $('#test-area');
 const $myButton	   = $('#myButton');
 
 const MAX_ATTEMPTS  = 7;
-const MAX_DICTIONARY = 431; //obtained from xivapi.com
-const $mainContent  = $('#main-content');
+const MAX_DICTIONARY = 419; //obtained from xivapi.com
 
-let dictionary
-let currentWord = new Word("","","");
+let currentWord;
 let attempts = 0;
 
 drawKeyboard();
@@ -18,42 +15,52 @@ function startNewGame(){
     let randomIndex = Math.floor(Math.random() * MAX_DICTIONARY);
     let getAPI = `https://xivapi.com/companion/${randomIndex}`;
     $.getJSON(getAPI).done(function( data ) {
-        currentWord = new Word(data.Name.toUpperCase(),
-            data.Description.replace(`Summon your ${data.Name} minion. `,""),
-            data.IconHD);
+        let description =  data.Description.replace(`Summon your ${data.Name} minion. `,``);
+        description =  description.replace(`${data.Name}`," _____ ");
+        currentWord = new Word(data.Name.toUpperCase(), description, data.Tooltip, data.IconHD);
         currentWord.printHint("#hint");    
         currentWord.printBlanks("#phrase");
+    }).done(function() {
+        if(currentWord.Name==="") {
+            startNewGame();
+            console.log("Blank data");
+        }
+    });
+    $("#keyboard button").each(function(){
+        $(this).removeAttr('disabled') 
+        $(this).removeClass("strikethrough")
     });
 
-    $("#keyboard button").each(function(){
-        $(this).removeAttr('disabled')
-    });
 }
 
-
 $("#keyboard button").click(function(e){
-    let $buttonID = $("#"+e.target.id);
-    $buttonID.attr("disabled", "true");
-    let selectedLetter = $buttonID.text().trim();
+    let $selfID = $("#"+e.target.id);
+    $selfID.attr("disabled", "true");
+    let selectedLetter = $selfID.text().trim();
     if(currentWord.key.includes(selectedLetter)){
         currentWord.reveal(selectedLetter, "#phrase");
+        $("#audioConfirm").get(0).play();
     }else{
         attempts++;
         $("#hangmanImg").attr("src", `images/hangman${attempts}.png`);
         $("#hint img").css("opacity", (attempts/MAX_ATTEMPTS*.4));
+        $selfID.addClass("strikethrough")
     }
-    //call function to check attempts/etc
     if(attempts < MAX_ATTEMPTS){
-        if( currentWord.isCompleted()){
-            gameOverScreen("win")
-        }
+        currentWord.isCompleted() ? gameOver(true): "";
     }else{
-        gameOverScreen("lose");
+        gameOver(false);
     }
 });
 
-$("#reset").click(function(){    
+
+$("#reset").click(function(e){   
+    let $selfID = $("#"+e.target.id);
+    $selfID.prop("disabled", true);
     startNewGame();
+    setTimeout(function(){ 
+        $selfID.removeAttr("disabled");
+    }, 1500);
 });
 
 function drawKeyboard(){
@@ -71,25 +78,23 @@ function drawKeyboard(){
     });
 }
 
-function gameOverScreen(status){
-    if(status === "win"){
+function gameOver(playerWon){
+    if(playerWon){
         $("#gameOverMsg").html(
-            `
-            <h3>Congratulations</h3>
+            `<h3>Congratulations!</h3>
             <p>You have won! Great job. Try again?</p>
-            `)
+            <p class="quote"><em>${currentWord.tooltip} </em></p>`)
     }else{
         $("#gameOverMsg").html(
-            `
-            <h3>Game Over.</h3>
+            `<h3>Game Over.</h3>
             <p>Sorry, You have lost. </p>
-            <p>The correct answer is <strong>${currentWord.key}</strong> </p><p>Try again?</p>
-            `)
+            <p>The correct answer is <strong>${currentWord.key}</strong> </p>
+            <p>Try again?</p>`)
+        $("#audioError").get(0).play();
     }
     $('#gameOver').fadeIn(600);
 }
 
-//button for testing things
 $myButton.click(function(){
-    gameOverScreen("win")
+    
 });
