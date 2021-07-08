@@ -49,7 +49,7 @@ button:hover:enabled {
 .main-content {
   display: inline-block;
   text-align: center;
-  min-width: 1200px;
+  width: 1200px;
   min-height: 550px;
   border-style: ridge none ridge none;
   background-color: rgba(0, 0, 0, 0.5);
@@ -72,7 +72,8 @@ button:hover:enabled {
 }
 
 .board div {
-  display: block;
+  align-self: flex-end;
+  padding-bottom: 10px;
 }
 
 .keyboard {

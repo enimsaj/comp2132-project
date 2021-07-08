@@ -67,7 +67,7 @@ button:hover:enabled{
 .main-content{
     display: inline-block;
     text-align: center;
-    min-width: $min_width;
+    width: $min_width;
     min-height: 550px;
     border-style: ridge none ridge none;
     background-color: rgba(0, 0, 0, .5);
@@ -87,7 +87,8 @@ button:hover:enabled{
         }       
     }
     div{
-        display: block;
+        align-self: flex-end;
+        padding-bottom: 10px;
     }
 }
 .keyboard{

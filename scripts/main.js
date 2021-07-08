@@ -1,7 +1,7 @@
 const $myButton	   = $('#myButton');
 
 const MAX_ATTEMPTS  = 7;
-const MAX_DICTIONARY = 419; //obtained from xivapi.com
+const MAX_DICTIONARY = 410; //obtained from xivapi.com
 
 let currentWord;
 let attempts = 0;
@@ -15,7 +15,11 @@ function startNewGame(){
     let randomIndex = Math.floor(Math.random() * MAX_DICTIONARY);
     let getAPI = `https://xivapi.com/companion/${randomIndex}`;
     $.getJSON(getAPI).done(function( data ) {
-        let description =  data.Description.replace(`Summon your ${data.Name} minion. `,``);
+        let description =  data.Description
+        if(description === ""){
+            description = data.DescriptionEnhanced
+        }        
+        description = description.replace(`Summon your ${data.Name} minion. `,``);
         description =  description.replace(`${data.Name}`," _____ ");
         currentWord = new Word(data.Name.toUpperCase(), description, data.Tooltip, data.IconHD);
         currentWord.printHint("#hint");    
@@ -96,5 +100,6 @@ function gameOver(playerWon){
 }
 
 $myButton.click(function(){
-    
+    	
+document.getElementById("myTest").style.fontFamily = "Arial";
 });
